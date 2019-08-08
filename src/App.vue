@@ -8,29 +8,29 @@
         <el-aside width="200px">
           <navmenu></navmenu>
         </el-aside>
-        <el-main>Main
+        <el-main>
+          <router-view></router-view>
         </el-main>
       </el-container>
     </el-container>
   </div>
 </template>
 <script>
-import NavMenu from '@/components/NavMenu'
-import Header from '@/components/Header'
+import NavMenu from "@/components/NavMenu";
+import Header from "@/components/Header";
 
 export default {
-  name: 'app',
+  name: "app",
   components: {
-    'navmenu': NavMenu,
-    'vheader': Header
+    navmenu: NavMenu,
+    vheader: Header
   }
-}
-
+};
 </script>
 
 <style>
 .header {
-  background-color: #409EFF;
+  background-color: #409eff;
   color: #fff;
   line-height: 60px;
 }

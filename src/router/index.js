@@ -4,16 +4,14 @@ import menus from '@/config/menu-config'
 
 Vue.use(Router)
 
-var routes = []
-
+var menusRoutes = []
 menus.forEach((item) => {
   item.sub.forEach((sub) => {
-    routes.push({
+    menusRoutes.push({
       path: `/${sub.componentName}`,
       name: sub.componentName,
       component: () => import(`@/components/${sub.componentName}`)
     })
   })
 })
-
-export default new Router({ routes })
+export default new Router({ routes: menusRoutes })

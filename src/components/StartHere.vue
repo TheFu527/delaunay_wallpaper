@@ -1,27 +1,26 @@
 <template>
   <el-container>
-    <el-header>
-      <el-steps :active="active" align-center>
-        <el-step title="Step 1" description="Upload your image" icon="el-icon-upload"></el-step>
-        <el-step title="Step 2" description="Set some parameters" icon="el-icon-edit"></el-step>
-        <el-step
-          title="Step 3"
-          description="Download your awesome wallpaper"
-          icon="el-icon-picture"
-        ></el-step>
-      </el-steps>
+    <el-header height="150px">
+      <el-row type="flex" class="row-bg" justify="center">
+        <el-steps :active="active" align-center>
+          <el-step title="Step 1" description="Upload your image" icon="el-icon-upload"></el-step>
+          <el-step title="Step 2" description="Set some parameters" icon="el-icon-edit"></el-step>
+          <el-step
+            title="Step 3"
+            description="Download your awesome wallpaper"
+            icon="el-icon-picture"
+          ></el-step>
+        </el-steps>
+      </el-row>
     </el-header>
     <el-main>
       <i :is="currentStep"></i>
     </el-main>
     <el-footer>
       <el-row type="flex" justify="center">
-        <el-col :span="4">
-          <el-button :disabled="noBack" @click="back">Back</el-button>
-        </el-col>
-        <el-col :span="4">
-          <el-button type="primary" @click="next">{{this.active<2?'Next':'Download'}}</el-button>
-        </el-col>
+        <el-button :disabled="noBack" @click="back">Back</el-button>
+        <el-col :span="4" type="flex" justify="center"></el-col>
+        <el-button type="primary" @click="next">{{this.active<2?'Next':'Download'}}</el-button>
       </el-row>
     </el-footer>
   </el-container>
@@ -55,7 +54,7 @@ export default {
     },
     back() {
       this.active--;
-      if (this.active ==2) this.active = 1;
+      if (this.active == 2) this.active = 1;
       if (this.active == 0) this.noBack = true;
       this.goWhere();
     },

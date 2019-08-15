@@ -1,12 +1,61 @@
 <template>
-  <div>我是第一个子组件</div>
+  <div>
+    <el-row type="flex" justify="center">
+      <el-upload
+        class="upload-demo"
+        ref="upload"
+        action="#"
+        list-type="picture"
+        :on-preview="handlePreview"
+        :on-remove="handleRemove"
+        :file-list="fileList"
+        :auto-upload="false"
+        :limit="1"
+        :on-exceed="handleExceed"
+        :on-change="loadJsonFromFileConfirmed"
+      >
+        <el-button slot="trigger" size="small" type="primary">Select</el-button>
+        <div slot="tip" class="el-upload__tip">Only support jpg/png</div>
+      </el-upload>
+    </el-row>
+    <el-dialog :visible.sync="dialogVisible">
+      <img width="100%" :src="dialogImageUrl" alt />
+    </el-dialog>
+  </div>
 </template>
 
 <script>
-  export default {
-    data() {
-      return {
-      }
+export default {
+  data() {
+    return {
+      dialogImageUrl: "",
+      dialogVisible: false,
+      disabled: false,
+      fileList: [
+        {
+          name: "food.jpeg",
+          url:
+            "https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100"
+        }
+      ]
+    };
+  },
+  methods: {
+    handleRemove(file) {
+      // console.log(file);
+    },
+    handlePreview(file) {
+      // console.log(file);
+      this.dialogImageUrl = file.url;
+      // console.log(this.dialogImageUrl);
+      this.dialogVisible = true;
+    },
+    handleExceed(files, fileList) {
+      this.$message.warning(`Limit to select 1 file.`);
+    },
+    loadJsonFromFileConfirmed(file) {
+      this.dialogImageUrl = file.url;
     }
   }
+};
 </script>

@@ -1,29 +1,31 @@
 <template>
-  <el-container>
-    <el-header height="150px">
-      <el-row type="flex" class="row-bg" justify="center">
-        <el-steps :active="active" align-center>
-          <el-step title="Step 1" description="Upload your image" icon="el-icon-upload"></el-step>
-          <el-step title="Step 2" description="Set some parameters" icon="el-icon-edit"></el-step>
-          <el-step
-            title="Step 3"
-            description="Download your awesome wallpaper"
-            icon="el-icon-picture"
-          ></el-step>
-        </el-steps>
-      </el-row>
-    </el-header>
-    <el-main>
-      <i :is="currentStep"></i>
-    </el-main>
-    <el-footer>
-      <el-row type="flex" justify="center">
-        <el-button :disabled="noBack" @click="back">Back</el-button>
-        <el-col :span="4" type="flex" justify="center"></el-col>
-        <el-button type="primary" @click="next">{{this.active<2?'Next':'Download'}}</el-button>
-      </el-row>
-    </el-footer>
-  </el-container>
+  <div>
+    <el-container>
+      <el-header height="150px">
+        <el-row type="flex" class="row-bg" justify="center">
+          <el-steps :active="active" align-center>
+            <el-step title="Step 1" description="Upload your image" icon="el-icon-upload"></el-step>
+            <el-step title="Step 2" description="Set some parameters" icon="el-icon-edit"></el-step>
+            <el-step
+              title="Step 3"
+              description="Download your awesome wallpaper"
+              icon="el-icon-picture"
+            ></el-step>
+          </el-steps>
+        </el-row>
+      </el-header>
+      <el-main>
+        <component v-bind:is="currentStep" v-on:getData="getData"></component>
+      </el-main>
+      <el-footer>
+        <el-row type="flex" justify="center">
+          <el-button :disabled="noBack" @click="back">Back</el-button>
+          <el-col :span="4" type="flex" justify="center"></el-col>
+          <el-button type="primary" @click="next">{{this.active<2?'Next':'Download'}}</el-button>
+        </el-row>
+      </el-footer>
+    </el-container>
+  </div>
 </template>
 
 <script>
@@ -32,6 +34,12 @@ import step2 from "@/components/steps/Options";
 import step3 from "@/components/steps/View";
 
 export default {
+  name: "Steps",
+  components: {
+    step1: step1,
+    step2: step2,
+    step3: step3
+  },
   data() {
     return {
       active: 0,
@@ -39,7 +47,9 @@ export default {
       step1: "step1",
       step2: "step2",
       step3: "step3",
-      currentStep: "step1"
+      currentStep: "step1",
+      imageUrl: "",
+      pointsNum: ""
     };
   },
 
@@ -50,6 +60,8 @@ export default {
       if (this.active == 4) {
         this.active = 3;
       }
+      console.log(this.imageUrl);
+      console.log(this.pointsNum);
       this.goWhere();
     },
     back() {
@@ -68,13 +80,16 @@ export default {
       } else if (this.active == 3) {
         this.currentStep = step3;
       }
-    }
-  },
-
-  components: {
-    step1,
-    step2,
-    step3
+    },
+    getData(data, step) {
+      console.log(data);
+      console.log(step);
+      if (step == 1) {
+        this.imageUrl = data;
+      } else if (step == 2) {
+        this.pointsNum = data;
+      }
+    },
   }
 };
 </script>

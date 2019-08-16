@@ -1,2 +1,0 @@
-webpackJsonp([4],{oDBg:function(e,n,t){"use strict";Object.defineProperty(n,"__esModule",{value:!0});var u={render:function(){var e=this,n=e.$createElement;return(e._self._c||n)("el-input",{attrs:{placeholder:"请输入内容"},model:{value:e.input,callback:function(n){e.input=n},expression:"input"}})},staticRenderFns:[]},l=t("VU/8")({data:function(){return{input:""}}},u,!1,null,null,null);n.default=l.exports}});
-//# sourceMappingURL=4.6abb52ce98f27c36dc4f.js.map

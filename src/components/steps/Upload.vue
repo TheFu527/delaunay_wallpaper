@@ -12,7 +12,7 @@
         :auto-upload="false"
         :limit="1"
         :on-exceed="handleExceed"
-        :on-change="loadJsonFromFileConfirmed"
+        :on-change="loadUrlFromFileConfirmed"
       >
         <el-button slot="trigger" size="small" type="primary">Select</el-button>
         <div slot="tip" class="el-upload__tip">Only support jpg/png</div>
@@ -47,14 +47,13 @@ export default {
     handlePreview(file) {
       // console.log(file);
       this.dialogImageUrl = file.url;
-      // console.log(this.dialogImageUrl);
       this.dialogVisible = true;
     },
     handleExceed(files, fileList) {
       this.$message.warning(`Limit to select 1 file.`);
     },
-    loadJsonFromFileConfirmed(file) {
-      this.dialogImageUrl = file.url;
+    loadUrlFromFileConfirmed(file) {
+      this.$emit('getData', file.url, 1);
     }
   }
 };

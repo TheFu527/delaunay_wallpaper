@@ -15,7 +15,7 @@
         </el-row>
       </el-header>
       <el-main>
-        <component v-bind:is="currentStep" v-on:getData="getData"></component>
+        <component v-bind:is="currentStep" v-on:getData="getData" v-bind:image="image"></component>
       </el-main>
       <el-footer>
         <el-row type="flex" justify="center">
@@ -48,7 +48,7 @@ export default {
       step2: "step2",
       step3: "step3",
       currentStep: "step1",
-      imageUrl: "",
+      image: "",
       pointsNum: ""
     };
   },
@@ -60,7 +60,8 @@ export default {
       if (this.active == 4) {
         this.active = 3;
       }
-      console.log(this.imageUrl);
+      console.log("this.image");
+      console.log(this.image);
       console.log(this.pointsNum);
       this.goWhere();
     },
@@ -85,7 +86,15 @@ export default {
       console.log(data);
       console.log(step);
       if (step == 1) {
-        this.imageUrl = data;
+        var reader = new FileReader();
+        reader.readAsDataURL(data.raw);
+        reader.onload = () => {
+          this.image = reader.result;
+        }
+        
+        console.log("image.result");
+        console.log(this.image);
+        
       } else if (step == 2) {
         this.pointsNum = data;
       }

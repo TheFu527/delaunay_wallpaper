@@ -6,6 +6,7 @@
         ref="upload"
         action="#"
         list-type="picture"
+        accept="image/jpeg, image/png"
         :on-preview="handlePreview"
         :on-remove="handleRemove"
         :file-list="fileList"
@@ -31,13 +32,7 @@ export default {
       dialogImageUrl: "",
       dialogVisible: false,
       disabled: false,
-      fileList: [
-        {
-          name: "food.jpeg",
-          url:
-            "https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100"
-        }
-      ]
+      fileList: []
     };
   },
   methods: {
@@ -53,7 +48,8 @@ export default {
       this.$message.warning(`Limit to select 1 file.`);
     },
     loadUrlFromFileConfirmed(file) {
-      this.$emit('getData', file.url, 1);
+      // console.log(file.url);
+      this.$emit("getData", file, 1);
     }
   }
 };
